@@ -20,11 +20,11 @@ export class Connection {
     
     const config = {
       dialect: "postgres" as Dialect,
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : undefined,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      host: 'dpg-cvl63rruibrs73euj6k0-a.oregon-postgres.render.com',
+      port: 5432,
+      username: 'akshay',
+      password:'xtLOGAaQ3Kuh9S9frBFQP4G3mEhsxdu4',
+      database: "ev_db_o15x",
       logging: process.env.NODE_ENV === 'development' ? console.log : false,
       models: [User, Example1,ChargingStation],
       dialectOptions: {
@@ -63,7 +63,7 @@ export class Connection {
 
   private getSSLConfiguration(): any {
     // Force SSL configuration based on environment
-    const useSSL = process.env.DB_SSL === 'true';;
+    const useSSL = 'true';;
     
     if (!useSSL) {
       return false;
@@ -71,14 +71,13 @@ export class Connection {
 
     const sslConfig: any = {
       // Always set to false for development to allow self-signed certificates
-      rejectUnauthorized: process.env.NODE_ENV === 'production' 
+      rejectUnauthorized: true 
         && process.env.DB_SSL_REJECT_UNAUTHORIZED !== 'false'
     };
 
     // Optional: Add CA certificate if provided
-    if (process.env.DB_SSL_CA_PATH) {
       try {
-        const caPath = path.resolve(process.env.DB_SSL_CA_PATH);
+        const caPath = path.resolve('./config/us-east-1-bundle.pem');
         
         // Check if file exists before reading
         if (fs.existsSync(caPath)) {
@@ -89,7 +88,7 @@ export class Connection {
       } catch (error) {
         console.warn('Error reading SSL CA file:', error);
       }
-    }
+   
 
     console.log('SSL Configuration:', sslConfig);
     return sslConfig;
