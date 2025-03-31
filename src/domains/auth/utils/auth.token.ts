@@ -5,7 +5,7 @@ import { User } from "../../../common/entity/user/user.entity";
 @Service()
 export class AuthToken {
   
-  private readonly secretKey: string = process.env.SECRET_KEY || "";
+  private readonly secretKey: string = "JWTsign" ;
   constructor() {}
 
   generateToken(id: number, role: string,email:string): string {
