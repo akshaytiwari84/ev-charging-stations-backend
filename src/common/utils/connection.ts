@@ -63,7 +63,7 @@ export class Connection {
 
   private getSSLConfiguration(): any {
     // Force SSL configuration based on environment
-    const useSSL = false;
+    const useSSL = process.env.DB_SSL === 'true';;
     
     if (!useSSL) {
       return false;
