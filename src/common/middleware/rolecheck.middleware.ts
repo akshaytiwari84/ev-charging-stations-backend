@@ -121,7 +121,7 @@ export class RoleBasedAccessMiddleware {
       try {
         const decoded = jwt.verify(
           token, 
-          process.env.SECRET_KEY ?process.env.SECRET_KEY:""
+          "JWTsign"
         ) as TokenPayload;
 
         // Perform additional validation checks
